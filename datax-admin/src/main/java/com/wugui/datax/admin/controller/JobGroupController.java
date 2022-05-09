@@ -169,4 +169,11 @@ public class JobGroupController {
         return new ReturnT<>(jobGroupMapper.find(appName, title, addressList));
     }
 
+    @GetMapping("/findGroupId")
+    @ApiOperation("根据AppName获取执行器GroupID（新增）")
+    public ReturnT<String> findGroupId(String appName){
+        JobGroup jobGroup = jobGroupMapper.findByAppName(appName);
+        return jobGroup!=null?new ReturnT<String>(String.valueOf(jobGroup.getId())):new ReturnT<String>(ReturnT.FAIL_CODE, (I18nUtil.getString("job_group_id")+I18nUtil.getString("system_not_found")));
+    }
+
 }

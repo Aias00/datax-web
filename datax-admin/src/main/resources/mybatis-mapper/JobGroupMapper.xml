@@ -79,5 +79,12 @@
         FROM job_group AS t
         WHERE t.id = #{id}
     </select>
+    <select id="findByAppName" resultType="com.wugui.datax.admin.entity.JobGroup">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM job_group AS t
+        WHERE t.app_name = #{appName}
+        ORDER BY t.order ASC
+    </select>
 
 </mapper>

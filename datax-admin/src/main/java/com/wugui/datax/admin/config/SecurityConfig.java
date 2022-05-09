@@ -52,6 +52,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/static/**","/index.html","/favicon.ico","/avatar.jpg").permitAll()
                 .antMatchers("/api/callback","/api/processCallback","/api/registry","/api/registryRemove").permitAll()
+                // 先不对job接口做权限验证
+                .antMatchers("/api/job/add",
+                        "/api/job/start",
+                        "/api/job/stop",
+                        "/api/job/update",
+                        "/api/job/remove/*",
+                        "/api/job/trigger",
+                        "/api/job/nextTriggerTime",
+                        "/api/job/getById",
+                        "api/jobGroup/findGroupId").permitAll()
                 .antMatchers("/doc.html","/swagger-resources/**","/webjars/**","/*/api-docs").anonymous()
                 .anyRequest().authenticated()
                 .and()

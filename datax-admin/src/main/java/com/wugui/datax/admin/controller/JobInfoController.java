@@ -47,6 +47,12 @@ public class JobInfoController extends BaseController{
         return new ReturnT<>(jobService.pageList((current-1)*size, size, jobGroup, triggerStatus, jobDesc, glueType, 0, projectIds));
     }
 
+    @GetMapping("/getById")
+    @ApiOperation("通过id获取任务（新增）")
+    public ReturnT<JobInfo> get(int id) {
+        return new ReturnT<>(jobService.get(id));
+    }
+
     @GetMapping("/list")
     @ApiOperation("全部任务列表")
     public ReturnT<List<JobInfo>> list(){

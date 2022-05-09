@@ -1,0 +1,8 @@
+com/wugui/datax/admin/http/dto/JobGroupDto.class
+com/wugui/datax/admin/http/model/LoginUser.class
+com/wugui/datax/admin/http/config/FeignBasicAuthRequestInterceptor.class
+com/wugui/datax/admin/http/api/DataxAdminHttpApi.class
+com/wugui/datax/admin/http/model/ReturnT.class
+com/wugui/datax/admin/http/dto/JobInfoDto.class
+com/wugui/datax/admin/http/config/FeignConfiguration.class
+com/wugui/datax/admin/http/dto/TriggerJobDto.class
