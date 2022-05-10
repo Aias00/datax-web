@@ -60,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/api/job/remove/*",
                         "/api/job/trigger",
                         "/api/job/nextTriggerTime",
-                        "/api/job/getById",
+//                        "/api/job/getById",
                         "api/jobGroup/findGroupId").permitAll()
                 .antMatchers("/doc.html","/swagger-resources/**","/webjars/**","/*/api-docs").anonymous()
                 .anyRequest().authenticated()

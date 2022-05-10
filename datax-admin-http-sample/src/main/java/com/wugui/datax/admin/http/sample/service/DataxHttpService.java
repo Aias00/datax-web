@@ -6,5 +6,4 @@ package com.wugui.datax.admin.http.sample.service;
  * Describe:
  */
 public interface DataxHttpService {
-//    void login();
 }

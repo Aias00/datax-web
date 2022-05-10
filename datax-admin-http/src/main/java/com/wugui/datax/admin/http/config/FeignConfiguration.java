@@ -1,5 +1,6 @@
 package com.wugui.datax.admin.http.config;
 
+import com.wugui.datax.admin.http.properties.DataxHttpProperties;
 import feign.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
