@@ -8,7 +8,7 @@ public class LoginUser {
 
     private String username;
     private String password;
-    private Integer rememberMe;
+    private Integer rememberMe = 0;
 
     public LoginUser(String username, String password) {
         this.username = username;

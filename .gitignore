@@ -15,8 +15,8 @@
 /datax-rpc/target/
 /datax-all.iml
 /logs/
-*-dev*
 /data/
 /build/
 /packages/
-/datax-assembly/target/
+/*/target/
+/*/*/target/

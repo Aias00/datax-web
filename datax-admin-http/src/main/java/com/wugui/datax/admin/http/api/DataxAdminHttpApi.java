@@ -1,29 +1,21 @@
 package com.wugui.datax.admin.http.api;
 
-import com.wugui.datax.admin.http.config.FeignBasicAuthRequestInterceptor;
 import com.wugui.datax.admin.http.config.FeignConfiguration;
-import com.wugui.datax.admin.http.dto.JobGroupDto;
 import com.wugui.datax.admin.http.dto.JobInfoDto;
 import com.wugui.datax.admin.http.dto.TriggerJobDto;
-import com.wugui.datax.admin.http.model.LoginUser;
 import com.wugui.datax.admin.http.model.ReturnT;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Author: huangjj
  * Date: 2022/5/9 5:12 PM
  * Describe:
  */
-@FeignClient(url = "${datax.job.admin.addresses}",name = "datax-admin-http")
+@FeignClient(url = "${datax.job.admin.addresses}",name = "datax-admin-http", configuration = FeignConfiguration.class)
 public interface DataxAdminHttpApi {
-
-//    @PostMapping("api/auth/login")
-//    Map<String, Object> login(@RequestBody LoginUser loginUser);
 
     /**
      * 添加任务

@@ -25,13 +25,11 @@ public class TestController {
 
     @PostMapping("start")
     public ReturnT<String> start(){
-//        dataxHttpService.login();
         return dataxAdminHttpApi.start(14);
     }
 
     @GetMapping("get")
     public ReturnT<JobInfoDto> get(){
-//        dataxHttpService.login();
         return dataxAdminHttpApi.get(14);
     }
 
