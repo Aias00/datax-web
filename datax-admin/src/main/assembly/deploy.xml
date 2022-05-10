@@ -13,6 +13,7 @@
             <scope>runtime</scope>
         </dependencySet>
     </dependencySets>
+
     <fileSets>
         <fileSet>
             <lineEnding>unix</lineEnding>
@@ -32,7 +33,8 @@
             <includes>
                 <include>*.properties</include>
                 <include>logback.xml</include>
-                <include>application.yml</include>
+<!--                <include>application.yml</include>-->
+                <include>*.yml</include>
                 <include>mybatis-mapper/**</include>
                 <include>i18n/**</include>
                 <include>static/**</include>

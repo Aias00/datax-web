@@ -6,7 +6,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.net.InetAddress;
@@ -32,6 +34,16 @@ public class DataXAdminApplication {
                         + "External-API: \thttp://{}:{}\n\t"
                         + "web-URL: \t\thttp://127.0.0.1:{}/index.html\n\t----------------------------------------------------------",
                 path, externalAPI, path, port);
+    }
+
+    @Bean
+    public JavaMailSenderImpl mailSender() {
+        JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
+
+        javaMailSender.setProtocol("SMTP");
+        javaMailSender.setHost("smtp.qq.com");
+        javaMailSender.setPort(465);
+        return javaMailSender;
     }
 
 

@@ -31,7 +31,8 @@
             <directory>./src/main/resources</directory>
             <includes>
                 <include>logback.xml</include>
-                <include>application.yml</include>
+<!--                <include>application.yml</include>-->
+                <include>*.yml</include>
             </includes>
             <outputDirectory>datax-executor/conf</outputDirectory>
         </fileSet>
