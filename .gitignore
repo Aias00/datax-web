@@ -5,6 +5,8 @@
 /datax-core/target/
 /datax-admin/datax-admin.iml
 /datax-admin/target/
+/datax-admin-http/target/
+/datax-admin-http-sample/target/
 /.idea/
 /datax-admin/.idea/
 /datax-registry/datax-registry.iml
