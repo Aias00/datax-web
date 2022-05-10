@@ -791,18 +791,11 @@
     </dependencies>
 
     <build>
-        <resources>
-            <resource>
-                <directory>src/main</directory>
-                <includes>
-                    <include>**/*.*</include>
-                </includes>
-            </resource>
-        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
                 <configuration>
                     <excludes>
                         <exclude>**/*.yml</exclude>
@@ -847,14 +840,6 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>com.wugui.datax.admin.DataXAdminApplication</mainClass>
-                        </manifest>
-                    </archive>
-<!--                    <descriptorRefs>-->
-<!--                        <descriptorRef>jar-with-dependencies</descriptorRef>-->
-<!--                    </descriptorRefs>-->
                     <appendAssemblyId>false</appendAssemblyId>
                     <attach>false</attach>
                     <descriptors>
