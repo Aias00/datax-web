@@ -1,8 +1,0 @@
-/Users/ada/Documents/work/workspace/basiccomponent_group/datax-web/datax-admin-http/src/main/java/com/wugui/datax/admin/http/dto/JobInfoDto.java
-/Users/ada/Documents/work/workspace/basiccomponent_group/datax-web/datax-admin-http/src/main/java/com/wugui/datax/admin/http/dto/TriggerJobDto.java
-/Users/ada/Documents/work/workspace/basiccomponent_group/datax-web/datax-admin-http/src/main/java/com/wugui/datax/admin/http/api/DataxAdminHttpApi.java
-/Users/ada/Documents/work/workspace/basiccomponent_group/datax-web/datax-admin-http/src/main/java/com/wugui/datax/admin/http/model/ReturnT.java
-/Users/ada/Documents/work/workspace/basiccomponent_group/datax-web/datax-admin-http/src/main/java/com/wugui/datax/admin/http/dto/JobGroupDto.java
-/Users/ada/Documents/work/workspace/basiccomponent_group/datax-web/datax-admin-http/src/main/java/com/wugui/datax/admin/http/config/FeignConfiguration.java
-/Users/ada/Documents/work/workspace/basiccomponent_group/datax-web/datax-admin-http/src/main/java/com/wugui/datax/admin/http/model/LoginUser.java
-/Users/ada/Documents/work/workspace/basiccomponent_group/datax-web/datax-admin-http/src/main/java/com/wugui/datax/admin/http/config/FeignBasicAuthRequestInterceptor.java
