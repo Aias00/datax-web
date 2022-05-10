@@ -29,7 +29,7 @@ public class DataxHttpProperties implements Serializable {
     private static final long serialVersionUID = 4734495947269306920L;
 
     private String address;
-    private String addresses;
+//    private String addresses;
     private String username;
     private String password;
 }

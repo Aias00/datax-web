@@ -7,7 +7,7 @@ import java.util.Date;
  *
  * @author jingwk  2019-11-17 14:25:49
  */
-public class JobInfoDto {
+public class DataXJobInfoDto {
 
 	private int id;
 

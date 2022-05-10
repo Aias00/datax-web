@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @Version 1.0
  * @since 2019/12/01 16:12
  */
-public class TriggerJobDto implements Serializable {
+public class DataXTriggerJobDto implements Serializable {
 
     private String executorParam;
 

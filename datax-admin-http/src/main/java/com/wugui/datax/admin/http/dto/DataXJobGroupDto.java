@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by jingwk on 2019/11/17
  */
-public class JobGroupDto {
+public class DataXJobGroupDto {
 
     private int id;
     private String appName;
