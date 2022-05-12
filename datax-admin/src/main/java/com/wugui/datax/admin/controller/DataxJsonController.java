@@ -1,5 +1,6 @@
 package com.wugui.datax.admin.controller;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.wugui.datax.admin.core.util.I18nUtil;
 import com.wugui.datax.admin.dto.DataXJsonBuildDto;
@@ -30,10 +31,10 @@ public class DataxJsonController extends BaseController {
     @ApiOperation("JSON构建")
     public R<String> buildJobJson(@RequestBody DataXJsonBuildDto dto) {
         String key = "system_please_choose";
-        if (dto.getReaderDatasourceId() == null) {
+        if (dto.getReaderDatasourceId() == null && ObjectUtil.isNull(dto.getReaderDatasource())) {
             return failed(I18nUtil.getString(key) + I18nUtil.getString("jobinfo_field_readerDataSource"));
         }
-        if (dto.getWriterDatasourceId() == null) {
+        if (dto.getWriterDatasourceId() == null && ObjectUtil.isNull(dto.getWriterDatasource())) {
             return failed(I18nUtil.getString(key) + I18nUtil.getString("jobinfo_field_writerDataSource"));
         }
         if (CollectionUtils.isEmpty(dto.getReaderColumns())) {
@@ -44,5 +45,7 @@ public class DataxJsonController extends BaseController {
         }
         return success(dataxJsonService.buildJobJson(dto));
     }
+
+
 
 }

@@ -18,11 +18,15 @@ public class DataXJsonBuildDto implements Serializable {
 
     private Long readerDatasourceId;
 
+    private DataXJobDatasourceDto readerDatasource;
+
     private List<String> readerTables;
 
     private List<String> readerColumns;
 
     private Long writerDatasourceId;
+
+    private DataXJobDatasourceDto writerDatasource;
 
     private List<String> writerTables;
 

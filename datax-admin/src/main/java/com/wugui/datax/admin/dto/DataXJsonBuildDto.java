@@ -1,5 +1,6 @@
 package com.wugui.datax.admin.dto;
 
+import com.wugui.datax.admin.entity.JobDatasource;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -18,11 +19,15 @@ public class DataXJsonBuildDto implements Serializable {
 
     private Long readerDatasourceId;
 
+    private JobDatasourceDto readerDatasource;
+
     private List<String> readerTables;
 
     private List<String> readerColumns;
 
     private Long writerDatasourceId;
+
+    private JobDatasourceDto writerDatasource;
 
     private List<String> writerTables;
 

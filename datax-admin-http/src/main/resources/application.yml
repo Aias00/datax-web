@@ -1,0 +1,10 @@
+feign:
+  client:
+    config:
+      default: # 这里用default就是全局配置，如果是写服务名称，则是针对某个微服务的配置
+        loggerLevel: FULL # 四种不同的级别：NONE、BASIC、HEADERS、FULL
+  compression:
+    request:
+      mime-types: application/json,application/xml
+      enabled: true
+      min-request-size: 2048

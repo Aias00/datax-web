@@ -1,8 +1,10 @@
 package com.wugui.datax.admin.service.impl;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.fastjson.JSON;
 import com.wugui.datax.admin.dto.DataXBatchJsonBuildDto;
 import com.wugui.datax.admin.dto.DataXJsonBuildDto;
+import com.wugui.datax.admin.dto.JobDatasourceDto;
 import com.wugui.datax.admin.entity.JobDatasource;
 import com.wugui.datax.admin.entity.JobInfo;
 import com.wugui.datax.admin.entity.JobTemplate;
@@ -39,10 +41,23 @@ public class DataxJsonServiceImpl implements DataxJsonService {
     public String buildJobJson(DataXJsonBuildDto dataXJsonBuildDto) {
         DataxJsonHelper dataxJsonHelper = new DataxJsonHelper();
         // reader
-        JobDatasource readerDatasource = jobJdbcDatasourceService.getById(dataXJsonBuildDto.getReaderDatasourceId());
+        JobDatasource readerDatasource = new JobDatasource();
+        // get readerdatasource first
+        if(dataXJsonBuildDto.getReaderDatasource() != null){
+             JobDatasourceDto readerDatasourceDto = dataXJsonBuildDto.getReaderDatasource();
+             BeanUtils.copyProperties(readerDatasourceDto,readerDatasource);
+        }else {
+            readerDatasource = jobJdbcDatasourceService.getById(dataXJsonBuildDto.getReaderDatasourceId());
+        }
         // reader plugin init
         dataxJsonHelper.initReader(dataXJsonBuildDto, readerDatasource);
-        JobDatasource writerDatasource = jobJdbcDatasourceService.getById(dataXJsonBuildDto.getWriterDatasourceId());
+        JobDatasource writerDatasource = new JobDatasource();
+        if(dataXJsonBuildDto.getWriterDatasource() != null){
+            JobDatasourceDto writerDatasourceDto = dataXJsonBuildDto.getWriterDatasource();
+            BeanUtils.copyProperties(writerDatasourceDto,writerDatasource);
+        }else {
+            writerDatasource = jobJdbcDatasourceService.getById(dataXJsonBuildDto.getWriterDatasourceId());
+        }
         dataxJsonHelper.initWriter(dataXJsonBuildDto, writerDatasource);
 
         return JSON.toJSONString(dataxJsonHelper.buildJob());
