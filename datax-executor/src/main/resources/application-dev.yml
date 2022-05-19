@@ -5,19 +5,19 @@ server:
 # log config
 logging:
   config: classpath:logback.xml
-  path: /Users/ada/Documents/work/logs/applogs/executor/jobhandler
+  path: /app/datax-web/dev/logs/applogs/executor/jobhandler
 
 datax:
   job:
     admin:
       ### datax admin address list, such as "http://address" or "http://address01,http://address02"
-      addresses: http://127.0.0.1:9201/
+      addresses: http://172.16.35.56:9201/
     executor:
       appname: datax-executor
-      ip: 127.0.0.1
+      ip: 172.16.35.56
       port: 9999
       ### job log path
-      logpath: /Users/ada/Documents/work/logs/applogs/executor/jobhandler
+      logpath: /app/datax-web/dev/logs/applogs/executor/jobhandler
       ### job log retention days
       logretentiondays: 30
     ### job, access token
@@ -25,7 +25,7 @@ datax:
 
   executor:
     #jsonpath: D:\\temp\\executor\\json\\
-    jsonpath: /Users/ada/Documents/work/temp/datax/executor/json
+    jsonpath: /app/datax-web/dev/temp/datax/executor/json
 
   #pypath: F:\tools\datax\bin\datax.py
-  pypath: /Users/ada/Documents/work/tools/datax/bin/datax.py
+  pypath: /app/datax/bin/datax.py

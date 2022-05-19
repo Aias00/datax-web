@@ -142,5 +142,8 @@ if [ "x${BASE_CONF_DIR}" != "x" ]; then
   LOG INFO "\033[1m Start to copy configuration file/directory\033[0m"
   # Copy the configuration file
   copy_replace application.yml
+  copy_replace application-dev.yml
+  copy_replace application-local.yml
+  copy_replace application-test.yml
   copy_replace logback.xml
 fi

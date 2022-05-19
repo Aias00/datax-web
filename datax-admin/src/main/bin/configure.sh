@@ -149,6 +149,9 @@ if [ "x${BASE_CONF_DIR}" != "x" ]; then
   # Copy the configuration file
   copy_replace bootstrap.properties
   copy_replace application.yml
+  copy_replace application-local.yml
+  copy_replace application-dev.yml
+  copy_replace application-test.yml
   copy_replace logback.xml
   copy_replace i18n
   copy_replace mybatis-mapper
@@ -157,8 +160,9 @@ fi
 echo "end to make directory"
 
 
-BOOTSTRAP_PROP_FILE="${CONF_PATH}/bootstrap.properties"
-# Start to initalize database
+##BOOTSTRAP_PROP_FILE="${CONF_PATH}/bootstrap.properties"
+BOOTSTRAP_PROP_FILE="${CONF_PATH}/application.yml"
+ Start to initalize database
 echo "Start to initalize database"
 if [ "x${SQL_SOURCE_PATH}" != "x" ] && [ -f "${SQL_SOURCE_PATH}" ]; then
    `mysql --version >/dev/null 2>&1`

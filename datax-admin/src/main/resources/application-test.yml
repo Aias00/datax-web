@@ -3,9 +3,9 @@ server:
 spring:
   #数据源
   datasource:
-    password: Dataops@2021
-    username: root
-    url: jdbc:mysql://172.16.35.57:3306/datax-web?serverTimezone=Asia/Shanghai&useLegacyDatetimeCode=false&useSSL=false&nullNamePatternMatchesAll=true&useUnicode=true&characterEncoding=UTF-8
+    username: developer
+    password: Ubd@2022!$
+    url: jdbc:mysql://172.16.21.127:3306/datax-web?serverTimezone=Asia/Shanghai&useLegacyDatetimeCode=false&useSSL=false&nullNamePatternMatchesAll=true&useUnicode=true&characterEncoding=UTF-8
     driver-class-name: com.mysql.jdbc.Driver
 
 
@@ -79,7 +79,7 @@ mybatis-plus:
 logging:
   level:
     com.wugui.datax.admin.mapper: error
-  path: /Users/ada/Documents/work/logs/applogs/admin
+  path: /app/datax-web/test/logs/applogs/admin
 
 #datax-job, access token
 datax:
