@@ -79,7 +79,7 @@ mybatis-plus:
 logging:
   level:
     com.wugui.datax.admin.mapper: error
-  path: /app/datax-web/test/logs/applogs/admin
+  path: /app/datax-web/logs/applogs/admin
 
 #datax-job, access token
 datax:
