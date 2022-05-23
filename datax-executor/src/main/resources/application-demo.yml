@@ -1,6 +1,6 @@
 # web port
 server:
-  port: 18201
+  port: 8201
 
 # log config
 logging:
@@ -11,11 +11,11 @@ datax:
   job:
     admin:
       ### datax admin address list, such as "http://address" or "http://address01,http://address02"
-      addresses: http://172.16.35.55:19201/
+      addresses: http://172.16.35.55:9201/
     executor:
       appname: datax-executor
       ip: 172.16.35.55
-      port: 19995
+      port: 9995
       ### job log path
       logpath: /app/datax-web/logs/applogs/executor/jobhandler
       ### job log retention days

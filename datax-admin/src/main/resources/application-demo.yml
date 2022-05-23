@@ -1,11 +1,11 @@
 server:
-  port: 19201
+  port: 9201
 spring:
   #数据源
   datasource:
     username: developer
     password: Ubd@2022!$
-    url: jdbc:mysql://172.16.21.127:3306/datax-web-test?serverTimezone=Asia/Shanghai&useLegacyDatetimeCode=false&useSSL=false&nullNamePatternMatchesAll=true&useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://172.16.21.127:3306/datax-web?serverTimezone=Asia/Shanghai&useLegacyDatetimeCode=false&useSSL=false&nullNamePatternMatchesAll=true&useUnicode=true&characterEncoding=UTF-8
     driver-class-name: com.mysql.jdbc.Driver
 
 
