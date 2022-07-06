@@ -106,6 +106,9 @@ public class DataxJsonHelper implements DataxJsonInterface {
         if (MYSQL.equals(datasource)) {
             readerPlugin = new MysqlReader();
             buildReader = buildReader();
+        } else if(KINGBASEES.equals(datasource)){
+            readerPlugin = new KingbaseESReader();
+            buildReader = buildReader();
         } else if (ORACLE.equals(datasource)) {
             readerPlugin = new OracleReader();
             buildReader = buildReader();
@@ -144,6 +147,9 @@ public class DataxJsonHelper implements DataxJsonInterface {
         if (MYSQL.equals(datasource)) {
             writerPlugin = new MysqlWriter();
             buildWriter = this.buildWriter();
+        } else if(KINGBASEES.equals(datasource)){
+            writerPlugin = new KingbaseESWriter();
+            buildWriter = buildWriter();
         } else if (ORACLE.equals(datasource)) {
             writerPlugin = new OraclelWriter();
             buildWriter = this.buildWriter();

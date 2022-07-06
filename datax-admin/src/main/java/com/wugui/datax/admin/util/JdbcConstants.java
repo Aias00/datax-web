@@ -67,6 +67,9 @@ public interface JdbcConstants {
     String KINGBASE                   = "kingbase";
     String KINGBASE_DRIVER            = "com.kingbase.Driver";
 
+    String KINGBASEES                   = "kingbasees";
+    String KINGBASEES_DRIVER            = "com.kingbase8.Driver";
+
     String GBASE                      = "gbase";
     String GBASE_DRIVER               = "com.gbase.jdbc.Driver";
 
