@@ -28,8 +28,14 @@
     <select id="findDead" parameterType="java.util.HashMap" resultType="java.lang.Integer">
 		SELECT t.id
 		FROM job_registry AS t
-		WHERE t.update_time <![CDATA[ < ]]> DATE_ADD(#{nowTime},INTERVAL -#{timeout} SECOND)
+		WHERE t.update_time <![CDATA[ < ]]> (TIMESTAMP '${nowTime}' - INTERVAL '${timeout}' SECOND )
 	</select>
+
+<!--    <select id="findDead" parameterType="java.util.HashMap" resultType="java.lang.Integer">-->
+<!--        SELECT t.id-->
+<!--        FROM job_registry AS t-->
+<!--		WHERE t.update_time <![CDATA[ < ]]> DATE_ADD(#{nowTime},INTERVAL -#{timeout} SECOND)-->
+<!--    </select>-->
 
     <delete id="removeDead" parameterType="java.lang.Integer">
         DELETE FROM job_registry
@@ -43,22 +49,29 @@
         SELECT
         <include refid="Base_Column_List"/>
         FROM job_registry AS t
-        WHERE t.update_time <![CDATA[ > ]]> DATE_ADD(#{nowTime},INTERVAL -#{timeout} SECOND)
+        WHERE t.update_time <![CDATA[ > ]]> (TIMESTAMP '${nowTime}' - INTERVAL '${timeout}' SECOND)
     </select>
+
+<!--    <select id="findAll" parameterType="java.util.HashMap" resultMap="JobRegistry">-->
+<!--        SELECT-->
+<!--        <include refid="Base_Column_List"/>-->
+<!--        FROM job_registry AS t-->
+<!--        WHERE t.update_time <![CDATA[ > ]]> DATE_ADD(#{nowTime},INTERVAL -#{timeout} SECOND)-->
+<!--    </select>-->
 
     <update id="registryUpdate">
         UPDATE job_registry
-        SET `update_time` = #{updateTime},
-        	`cpu_usage`=#{cpuUsage},
-        	`memory_usage`=#{memoryUsage},
-        	`load_average`=#{loadAverage}
-        WHERE `registry_group` = #{registryGroup}
-          AND `registry_key` = #{registryKey}
-          AND `registry_value` = #{registryValue}
+        SET update_time = #{updateTime},
+        	cpu_usage=#{cpuUsage},
+        	memory_usage=#{memoryUsage},
+        	load_average=#{loadAverage}
+        WHERE registry_group = #{registryGroup}
+          AND registry_key = #{registryKey}
+          AND registry_value = #{registryValue}
     </update>
 
     <insert id="registrySave">
-        INSERT INTO job_registry( `registry_group` , `registry_key` , `registry_value`, `cpu_usage`,`memory_usage`,`load_average`,`update_time`)
+        INSERT INTO job_registry( registry_group , registry_key , registry_value, cpu_usage,memory_usage,load_average,update_time)
         VALUES( #{registryGroup}  , #{registryKey} , #{registryValue},#{cpuUsage}, #{memoryUsage},#{loadAverage},#{updateTime})
     </insert>
 
