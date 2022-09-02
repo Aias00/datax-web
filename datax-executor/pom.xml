@@ -12,6 +12,7 @@
     <packaging>jar</packaging>
     <properties>
         <java.version>1.8</java.version>
+        <target.dir>distribution</target.dir>
     </properties>
 
     <dependencyManagement>
@@ -87,6 +88,87 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <!--移动配置文件到外部文件夹-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <mkdir dir="${project.build.directory}/${target.dir}" />
+                                <mkdir dir="${project.build.directory}/${target.dir}/conf" />
+                                <mkdir dir="${project.build.directory}/${target.dir}/bin" />
+                                <copy todir="${project.build.directory}/${target.dir}/conf">
+                                    <fileset dir="${project.build.directory}/classes">
+                                        <include name="application.yml" />
+                                        <include name="application*.yml" />
+                                        <include name="banner.txt" />
+                                        <include name="*.xml" />
+                                    </fileset>
+                                </copy>
+                                <copy todir="${project.build.directory}/${target.dir}">
+                                    <fileset dir="${project.build.directory}">
+                                        <include name="*.jar" />
+                                    </fileset>
+                                </copy>
+                                <fixcrlf file="${project.basedir}/common/script/datax-executor" eol="lf" eof="remove" encoding="utf-8" tab="add" destDir="${project.build.directory}/${target.dir}/bin" />
+                                <chmod file="${project.build.directory}/${target.dir}/bin/datax-executor" perm="755"/>
+                                <fixcrlf file="${project.basedir}/common/dockerfile/entrypoint.sh" eol="lf" eof="remove" encoding="utf-8" tab="add" destDir="${project.build.directory}/${target.dir}/bin" />
+                                <fixcrlf file="${project.basedir}/common/dockerfile/Dockerfile" eol="lf" eof="remove" encoding="utf-8" tab="add" destDir="${project.build.directory}/${target.dir}" />
+                                <fixcrlf file="${project.basedir}/common/dockerfile/*-docker.sh" eol="lf" eof="remove" encoding="utf-8" tab="add" destDir="${project.build.directory}/${target.dir}" />
+                                <fixcrlf file="${project.basedir}/common/dockerfile/README-docker部署文档.md" eol="lf" eof="remove" encoding="utf-8" tab="add" destDir="${project.build.directory}/${target.dir}" />
+                                <zip basedir="${project.build.directory}/${target.dir}" destfile="${project.build.directory}/datax-executor-${project.version}.zip" />
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!--docker插件 -->
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.40.1</version>
+                <executions>
+                    <execution>
+                        <id>tag-latest</id>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>tag-version</id>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- Docker 远程管理地址-->
+                    <!--                    <dockerHost>tcp://127.0.0.1:2375</dockerHost>-->
+                    <!--私服地址不使用可以不配置-->
+                    <registry>dockerhub.dap.local</registry>
+                    <images>
+                        <image>
+                            <!--                            <name>expos/expos-metrics:${project.version}</name>-->
+                            <name>dockerhub.dap.local/expos-metrics-job:${project.version}</name>
+                            <build>
+                                <args>
+                                    <!--为Dockerfile中提供参数, . 表示在dockerFile位置当前位置-->
+                                    <OUT_DIR_DATAX_EXECUTOR>.</OUT_DIR_DATAX_EXECUTOR>
+                                </args>
+                                <!--dockerFile位置-->
+                                <dockerFileDir>${project.build.directory}/${target.dir}</dockerFileDir>
+                            </build>
+                        </image>
+                    </images>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

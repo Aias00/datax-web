@@ -1,0 +1,31 @@
+# web port
+server:
+  port: 8201
+
+# log config
+logging:
+  config: classpath:logback.xml
+  path: /opt/datax-web/logs/applogs/executor/jobhandler
+
+datax:
+  job:
+    admin:
+      ### datax admin address list, such as "http://address" or "http://address01,http://address02"
+      addresses: http://172.16.35.56:9201/
+    executor:
+      appname: datax-executor
+      ip: 172.16.35.56
+      port: 9999
+      ### job log path
+      logpath: /opt/datax-web/logs/applogs/executor/jobhandler
+      ### job log retention days
+      logretentiondays: 30
+    ### job, access token
+    accessToken: qwertyuiop
+
+  executor:
+    #jsonpath: D:\\temp\\executor\\json\\
+    jsonpath: /opt/datax-web/temp/datax/executor/json
+
+  #pypath: F:\tools\datax\bin\datax.py
+  pypath: /opt/datax/bin/datax.py
