@@ -192,15 +192,32 @@ public class DataxJsonHelper implements DataxJsonInterface {
         }
 
         column = column.trim();
-        column = column.replace("[", "");
-        column = column.replace("]", "");
-        column = column.replace("`", "");
-        column = column.replace("\"", "");
-        column = column.replace("'", "");
 
+        if(column.startsWith("[") || column.endsWith("[")){
+            column = column.replace("[", "");
+        }
+        if(column.startsWith("]") || column.endsWith("]")){
+            column = column.replace("]", "");
+        }
+        if(column.startsWith("`") || column.endsWith("`")){
+            column = column.replace("`", "");
+        }
+        if(column.startsWith("\"") || column.endsWith("\"")){
+            column = column.replace("\"", "");
+        }
+        if(column.startsWith("'") || column.endsWith("'")){
+            column = column.replace("'", "");
+        }
         switch (dbType) {
             case MYSQL:
-                return String.format("`%s`", column);
+                //如果添加了函数，则识别函数里面的字段，目前先适配类型转换函数
+                // CAST(C_19fcb9eb2594059036dfede5f4ec53e8 AS DATETIME)  ==> CAST(`C_19fcb9eb2594059036dfede5f4ec53e8` AS DATETIME)
+                String[] sub = column.split("\\(|\\)");
+                if(sub.length>1){
+                    return column;
+                }else {
+                    return String.format("`%s`", column);
+                }
             case SQL_SERVER:
                 return String.format("[%s]", column);
             case POSTGRESQL:
