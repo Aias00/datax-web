@@ -3,6 +3,9 @@ server:
 spring:
   #数据源
   datasource:
+#    password: 123456
+#    username: mysql_user
+#    url: jdbc:mysql://127.0.0.1:3306/datax_web?serverTimezone=Asia/Shanghai&useLegacyDatetimeCode=false&useSSL=false&nullNamePatternMatchesAll=true&useUnicode=true&characterEncoding=UTF-8
     password: Dataops@2021
     username: root
     url: jdbc:mysql://172.16.35.57:3306/datax-web?serverTimezone=Asia/Shanghai&useLegacyDatetimeCode=false&useSSL=false&nullNamePatternMatchesAll=true&useUnicode=true&characterEncoding=UTF-8

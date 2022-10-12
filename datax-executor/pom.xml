@@ -131,45 +131,45 @@
                 </executions>
             </plugin>
             <!--docker插件 -->
-            <plugin>
-                <groupId>io.fabric8</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>0.40.1</version>
-                <executions>
-                    <execution>
-                        <id>tag-latest</id>
-                        <goals>
-                            <goal>build</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>tag-version</id>
-                        <goals>
-                            <goal>build</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <!-- Docker 远程管理地址-->
-                    <!--                    <dockerHost>tcp://127.0.0.1:2375</dockerHost>-->
-                    <!--私服地址不使用可以不配置-->
-                    <registry>dockerhub.dap.local</registry>
-                    <images>
-                        <image>
-                            <!--                            <name>expos/expos-metrics:${project.version}</name>-->
-                            <name>dockerhub.dap.local/expos-metrics-job:${project.version}</name>
-                            <build>
-                                <args>
-                                    <!--为Dockerfile中提供参数, . 表示在dockerFile位置当前位置-->
-                                    <OUT_DIR_DATAX_EXECUTOR>.</OUT_DIR_DATAX_EXECUTOR>
-                                </args>
-                                <!--dockerFile位置-->
-                                <dockerFileDir>${project.build.directory}/${target.dir}</dockerFileDir>
-                            </build>
-                        </image>
-                    </images>
-                </configuration>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>io.fabric8</groupId>-->
+<!--                <artifactId>docker-maven-plugin</artifactId>-->
+<!--                <version>0.40.1</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>tag-latest</id>-->
+<!--                        <goals>-->
+<!--                            <goal>build</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                    <execution>-->
+<!--                        <id>tag-version</id>-->
+<!--                        <goals>-->
+<!--                            <goal>build</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--                <configuration>-->
+<!--                    &lt;!&ndash; Docker 远程管理地址&ndash;&gt;-->
+<!--                    &lt;!&ndash;                    <dockerHost>tcp://127.0.0.1:2375</dockerHost>&ndash;&gt;-->
+<!--                    &lt;!&ndash;私服地址不使用可以不配置&ndash;&gt;-->
+<!--                    <registry>dockerhub.dap.local</registry>-->
+<!--                    <images>-->
+<!--                        <image>-->
+<!--                            &lt;!&ndash;                            <name>expos/expos-metrics:${project.version}</name>&ndash;&gt;-->
+<!--                            <name>dockerhub.dap.local/expos-metrics-job:${project.version}</name>-->
+<!--                            <build>-->
+<!--                                <args>-->
+<!--                                    &lt;!&ndash;为Dockerfile中提供参数, . 表示在dockerFile位置当前位置&ndash;&gt;-->
+<!--                                    <OUT_DIR_DATAX_EXECUTOR>.</OUT_DIR_DATAX_EXECUTOR>-->
+<!--                                </args>-->
+<!--                                &lt;!&ndash;dockerFile位置&ndash;&gt;-->
+<!--                                <dockerFileDir>${project.build.directory}/${target.dir}</dockerFileDir>-->
+<!--                            </build>-->
+<!--                        </image>-->
+<!--                    </images>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>

@@ -25,7 +25,7 @@ datax:
 
   executor:
     #jsonpath: D:\\temp\\executor\\json\\
-    jsonpath: /Users/ada/Documents/work/temp/datax6/executor/json
+    jsonpath: /Users/ada/Documents/work/temp/datax3/executor/json
 
   #pypath: F:\tools\datax\bin\datax.py
-  pypath: /Users/ada/Documents/work/tools/datax6/bin/datax.py
+  pypath: /Users/ada/Documents/work/tools/datax3/bin/datax.py

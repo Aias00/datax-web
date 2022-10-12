@@ -124,4 +124,7 @@ public interface JdbcConstants {
     String HBASE20XSQL = "hbase20xsql";
     String HBASE20XSQL_DRIVER = "org.apache.phoenix.jdbc.PhoenixDriver";
 
+    //添加 rdbms
+    String RDBMS = "rdbms";
+    String RDBMS_DRIVER = "com.alibaba.datax.plugin.rdbms.util.DataBaseType";
 }
