@@ -222,6 +222,7 @@ public class DataxJsonHelper implements DataxJsonInterface {
             column = column.replace("'", "");
         }
         switch (dbType) {
+            case HIVE:
             case MYSQL:
                 //如果添加了函数，则识别函数里面的字段，目前先适配类型转换函数
                 // CAST(C_19fcb9eb2594059036dfede5f4ec53e8 AS DATETIME)  ==> CAST(`C_19fcb9eb2594059036dfede5f4ec53e8` AS DATETIME)
