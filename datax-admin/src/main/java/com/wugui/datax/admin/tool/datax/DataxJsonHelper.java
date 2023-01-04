@@ -18,6 +18,7 @@ import com.wugui.datax.admin.util.JdbcConstants;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.ObjectUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -118,12 +119,21 @@ public class DataxJsonHelper implements DataxJsonInterface {
         } else if (POSTGRESQL.equals(datasource)) {
             readerPlugin = new PostgresqlReader();
             buildReader = buildReader();
+        }else if (DWS.equals(datasource)) {
+            readerPlugin = new PostgresqlReader();
+            buildReader = buildReader();
         } else if (CLICKHOUSE.equals(datasource)) {
             readerPlugin = new ClickHouseReader();
             buildReader = buildReader();
         } else if (HIVE.equals(datasource)) {
-            readerPlugin = new HiveReader();
-            buildReader = buildHiveReader();
+            if(ObjectUtils.isEmpty(this.rdbmsReaderDto)){
+                readerPlugin = new HiveReader();
+                buildReader = buildHiveReader();
+            }else {
+                //走rdbms方式采集
+                readerPlugin = new RdbmsReader();
+                buildReader = buildReader();
+            }
         } else if (HBASE.equals(datasource)) {
             readerPlugin = new HBaseReader();
             buildReader = buildHBaseReader();
@@ -159,12 +169,21 @@ public class DataxJsonHelper implements DataxJsonInterface {
         } else if (POSTGRESQL.equals(datasource)) {
             writerPlugin = new PostgresqllWriter();
             buildWriter = this.buildWriter();
-        } else if (JdbcConstants.CLICKHOUSE.equals(datasource)) {
+        } else if (DWS.equals(datasource)) {
+            writerPlugin = new PostgresqllWriter();
+            buildWriter = this.buildWriter();
+        }else if (JdbcConstants.CLICKHOUSE.equals(datasource)) {
             writerPlugin = new ClickHouseWriter();
             buildWriter = buildWriter();
         } else if (JdbcConstants.HIVE.equals(datasource)) {
-            writerPlugin = new HiveWriter();
-            buildWriter = this.buildHiveWriter();
+            if(ObjectUtils.isEmpty(this.rdbmsWriterDto)){
+                writerPlugin = new HiveWriter();
+                buildWriter = this.buildHiveWriter();
+            }else {
+                //走rdbms方式采集
+                writerPlugin = new RdbmsWriter();
+                buildWriter = this.buildWriter();
+            }
         } else if (JdbcConstants.HBASE.equals(datasource)) {
             writerPlugin = new HBaseWriter();
             buildWriter = this.buildHBaseWriter();
@@ -192,15 +211,33 @@ public class DataxJsonHelper implements DataxJsonInterface {
         }
 
         column = column.trim();
-        column = column.replace("[", "");
-        column = column.replace("]", "");
-        column = column.replace("`", "");
-        column = column.replace("\"", "");
-        column = column.replace("'", "");
 
+        if(column.startsWith("[") || column.endsWith("[")){
+            column = column.replace("[", "");
+        }
+        if(column.startsWith("]") || column.endsWith("]")){
+            column = column.replace("]", "");
+        }
+        if(column.startsWith("`") || column.endsWith("`")){
+            column = column.replace("`", "");
+        }
+        if(column.startsWith("\"") || column.endsWith("\"")){
+            column = column.replace("\"", "");
+        }
+        if(column.startsWith("'") || column.endsWith("'")){
+            column = column.replace("'", "");
+        }
         switch (dbType) {
+            case HIVE:
             case MYSQL:
-                return String.format("`%s`", column);
+                //如果添加了函数，则识别函数里面的字段，目前先适配类型转换函数
+                // CAST(C_19fcb9eb2594059036dfede5f4ec53e8 AS DATETIME)  ==> CAST(`C_19fcb9eb2594059036dfede5f4ec53e8` AS DATETIME)
+                String[] sub = column.split("\\(|\\)");
+                if(sub.length>1){
+                    return column;
+                }else {
+                    return String.format("`%s`", column);
+                }
             case SQL_SERVER:
                 return String.format("[%s]", column);
             case POSTGRESQL:

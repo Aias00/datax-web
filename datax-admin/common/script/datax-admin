@@ -1,0 +1,105 @@
+#!/bin/bash
+#######################
+#脚本使用方法：
+# 保证有且只有一个前缀为expos-metrics-job-executor的jar包即可。
+# Usage: $0 {start|stop|status|restart} {dev|test|prd}
+# Usage: $0 {start|stop|status|restart} {使用哪个环境的配置文件}
+#######################
+#可在此处添加需要加载的环境变量
+#######################
+#APP_NAME=expos-metrics-job-executor-1.1.0.jar
+ACTIVE_PROFILES=$2
+APP_BIN=$(cd `dirname $0`; pwd)
+APP_HOME=$(cd `dirname $APP_BIN`; pwd)
+APP_CONF=$APP_HOME/conf/
+APP_EXPRESS=datax-admin-2.1.3-SNAPSHOT.jar
+cd $APP_HOME
+if ls $APP_HOME/$APP_EXPRESS &> /dev/null ;then
+	if [ `ls $APP_HOME/$APP_EXPRESS | wc -l` -eq 1 ];then
+		APP_NAME=`find $APP_HOME -maxdepth 1 -name "$APP_EXPRESS"`
+	else
+		echo -e "\033[31m------   Error! Too Much JAR Packages In This Directory ! \033[0"
+		exit 2
+	fi
+else
+	echo -e "\033[31m------   Error! No JAR Package In Current File !\033[0"
+	exit 1
+fi
+
+is_exist () {
+  pid=`ps aux | grep -E ${APP_NAME} | grep -v grep | awk '{print $2}'`
+  if [ -z "$pid" ];then
+	  return 1
+  else
+	  return 0
+  fi
+}
+
+start () {
+    is_exist
+    if [ $? -eq 0 ];then
+        echo "${APP_NAME} is already running. pid=${pid} ."
+    else
+        nohup java -server -Xms1024m -Xmx1024m -Dspring.config.location=file:$APP_CONF -jar $APP_NAME --spring.profiles.active=$ACTIVE_PROFILES
+        sleep 5
+        log
+    fi
+}
+
+startNoLog () {
+    is_exist
+    if [ $? -eq 0 ];then
+        echo "${APP_NAME} is already running. pid=${pid} ."
+    else
+        nohup java -server -Xms1024m -Xmx1024m -Dspring.config.location=file:$APP_CONF -jar $APP_NAME --spring.profiles.active=$ACTIVE_PROFILES &
+        echo "${APP_NAME} started"
+    fi
+}
+
+
+stop_count=0
+stop () {
+  is_exist
+  if [ $? -eq 0 ];then
+	  kill  $pid
+	  let stop_count++
+	  echo "try to kill ${APP_NAME} $stop_count times"
+	  if [ $stop_count -eq 5 ];then
+	    is_exist
+	    if [ $? -eq 0 ];then
+	      echo "${APP_NAME} not stopped,please try kill -9 $pid"
+	    fi
+	  else
+	    sleep 2
+	    stop
+	  fi
+  else
+	  echo "${APP_NAME} has stopped"
+  fi
+}
+status () {
+  is_exist
+  if [ $? -eq 0 ];then
+	  echo "${APP_NAME} is running. Pid is ${pid}"
+  else
+	  echo "${APP_NAME} is not running"
+  fi
+}
+
+log () {
+    tail -f /opt/datax-web/datax-admin/nohup.out
+}
+
+case $1 in
+    start)
+	start;;
+    stop)
+	stop;;
+    restart)
+	stop
+	start;;
+    status)
+	status;;
+    *)
+	echo "Usage: $0 {start|stop|status|restart} {dev|test|prd} "
+esac
