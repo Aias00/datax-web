@@ -3,9 +3,9 @@ server:
 spring:
   #数据源
   datasource:
-    url: jdbc:kingbase8://106.74.96.67:54326/datax_web?currentSchema=datax_web&clientEncoding=UTF8
+    url: jdbc:kingbase8://172.16.21.25:34521/test?currentSchema=datax_web&clientEncoding=UTF8
     username: system
-    password: Uni.com@v6
+    password: KbsV8R6$Ubd
     driver-class-name: com.kingbase8.Driver
 
     hikari:

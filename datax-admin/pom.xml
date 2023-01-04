@@ -813,6 +813,15 @@
                 <kingbase.version>8.6.0</kingbase.version>
             </properties>
             <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>aqdn</id>
+            <properties>
+                <kingbase.version>8.6.0</kingbase.version>
+            </properties>
+            <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
         </profile>
