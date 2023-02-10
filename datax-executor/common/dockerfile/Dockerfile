@@ -1,4 +1,4 @@
-FROM openjdk:8-jre-alpine
+FROM harbor.dap.local/library/metrics-datax-base
 
 #时区
 RUN echo "Asia/Shanghai" > /etc/timezone
